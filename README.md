@@ -80,7 +80,7 @@ networks:
 ```
 ## Typical Workflow
 
-1. **Spin up the environment (Dev):**
+1. **Spin up the environment:**
    ```bash
    docker compose up -d
    ```
