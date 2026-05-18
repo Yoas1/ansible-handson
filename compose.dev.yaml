@@ -1,0 +1,51 @@
+---
+version: "3"
+
+services:
+  ansible:
+    build:
+      dockerfile: dockerfiles/control.dockerfile
+  
+    image: devops/ansible
+    container_name: ansible_control
+    hostname: ansible_control
+    stdin_open: true
+    tty: true
+    ports:
+      - 8080:8080
+    #volumes:
+    #  - ./:/workspace
+    networks:
+      - ansible
+    depends_on:
+      - worker1
+      - worker2
+  
+  worker1:
+    build:
+      dockerfile: dockerfiles/worker1.dockerfile
+      context: .
+    
+    image: devops/ansible-worker1
+    hostname: worker1
+    container_name: ansible_worker1
+    networks:
+      - ansible
+    restart: unless-stopped
+
+  worker2:
+    build:
+      dockerfile: dockerfiles/worker2.dockerfile
+      context: .
+    
+    image: devops/ansible-worker2
+    hostname: worker2
+    container_name: ansible_worker2
+    networks:
+      - ansible
+    restart: unless-stopped
+
+
+networks:
+  ansible:
+  

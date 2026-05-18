@@ -1,0 +1,10 @@
+ansible
+ansible-lint
+argcomplete
+kubernetes
+jsonpatch
+pymarkdownlnt
+pyyaml
+pre-commit
+resolvelib
+yamllint

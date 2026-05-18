@@ -1,0 +1,9 @@
+{
+    "plugins": {
+        "line-length": {
+            "line-length": 120,
+            "heading_line_length": 120,
+            "code_blocks": false
+        }
+    }
+}

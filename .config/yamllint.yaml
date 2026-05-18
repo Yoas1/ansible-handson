@@ -1,0 +1,12 @@
+---
+extends: default
+
+ignore-from-file: [.gitignore, .config/.gitignore]
+
+rules:
+  line-length:
+    max: 100
+
+  quoted-strings:
+    quote-type: double
+    required: only-when-needed

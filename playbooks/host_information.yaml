@@ -1,0 +1,24 @@
+---
+- name: Gather and display host information
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Display basic system configuration
+      ansible.builtin.debug:
+        msg:
+          - "----------------------------------------"
+          - "Host Profile for: {{ ansible_facts['hostname'] }}"
+          - "----------------------------------------"
+          - "Operating System: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}"
+          - "Architecture:     {{ ansible_facts['architecture'] }}"
+          - "Total Memory:     {{ ansible_facts['memtotal_mb'] }} MB"
+          - "CPU Cores:        {{ ansible_facts['processor_vcpus'] }}"
+          - "Primary IP:       {{ ansible_facts['default_ipv4']['address'] | default('No IP found') }}"
+
+    - name: Display storage/mount information
+      ansible.builtin.debug:
+        msg: "Mount point {{ item.mount }} has {{ (item.size_available / 1024 / 1024) | round(2) }} MB free out of {{ (item.size_total / 1024 / 1024) | round(2) }} MB"
+      loop: "{{ ansible_facts['mounts'] }}"
+      loop_control:
+        label: "{{ item.mount }}" 

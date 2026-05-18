@@ -1,0 +1,15 @@
+---
+prod:
+  hosts:
+    192.168.0.1
+
+dev:
+  hosts:
+    192.168.0.2
+
+testing:
+  vars:
+    ansible_user: admin
+  hosts:
+    worker1:
+    worker2:

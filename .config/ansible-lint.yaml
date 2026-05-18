@@ -1,0 +1,8 @@
+---
+offline: true
+
+exclude_paths:
+  - .*
+  - "!playbooks/*"
+  - vault.yaml
+  - "*.vault.yaml"

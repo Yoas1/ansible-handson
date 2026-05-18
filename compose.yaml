@@ -1,0 +1,39 @@
+---
+services:
+  ansible-controller:
+    image: yoas1/ansible-handson:controller-0.0.1
+    container_name: ansible_controller
+    hostname: ansible_controller
+    stdin_open: true
+    tty: true
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/workspace
+    networks:
+      - ansible
+    depends_on:
+      - worker1
+      - worker2
+    restart: unless-stopped
+  
+  worker1:    
+    image: yoas1/ansible-handson:worker1-0.0.1
+    hostname: worker1
+    container_name: ansible_worker1
+    networks:
+      - ansible
+    restart: unless-stopped
+
+  worker2:
+    image: yoas1/ansible-handson:worker2-0.0.1
+    hostname: worker2
+    container_name: ansible_worker2
+    networks:
+      - ansible
+    restart: unless-stopped
+
+
+networks:
+  ansible:
+  

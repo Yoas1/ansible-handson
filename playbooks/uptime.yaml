@@ -1,0 +1,10 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: Example Playbook
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Get uptime information
+      ansible.builtin.shell: /usr/bin/uptime >> ~/test.txt
+      register: result

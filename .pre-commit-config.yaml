@@ -1,0 +1,47 @@
+---
+repos:
+  - repo: local
+    hooks:
+      - id: yaml-file-extension
+        name: Check that YAML files have *.yaml extension
+        entry: YAML files must have .yaml extension
+        language: fail
+        files: .yml$
+      
+      - id: verify-vault-encryption
+        name: Check that *.vault.yaml files are encrypted
+        rntry: ansible-vault
+        args:
+          - view
+        language: system
+        files: vault(.yaml)?$
+      
+      - id: yamllint
+        name: yamllint
+        entry: yamllint
+        language: python
+        files: .yaml$
+      
+      - id: ansible-lint
+        name: ansible-lint
+        entry: ansible-lint --force-color
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: markdownlint
+        name: markdownlint
+        entry: pymarkdown
+        args:
+          - --config=.config/markdown-lint.json
+          - scan
+        language: python
+        types:
+          - markdown
+      
+      - id: shellcheck
+        name: shellcheck
+        entry: shellcheck
+        language: system
+        types:
+          - shell
